@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.VolleyHelper;
+import com.example.bavithrathangaraj.oneserviceinnovationhackathon.activity.CreateProductActivity;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.activity.ProfileActivity;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.activity.SelectUserActivity;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.base.BaseActivity;
@@ -43,6 +45,9 @@ public class ItemLandingActivity extends BaseActivity {
     RecyclerView recyclerView;
     private static final String BASE_URL = "http://192.168.1.169:3000/api/goods/Bob";
     RecyclerViewAdapter adapter;
+    ImageView add;
+    ImageView explore;
+    ImageView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,30 @@ public class ItemLandingActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), SelectUserActivity.class);
+                startActivity(intent);
+            }
+        });
+        add = (ImageView) findViewById(R.id.addPage);
+        explore = (ImageView) findViewById(R.id.explore);
+        message = (ImageView) findViewById(R.id.message);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), CreateProductActivity.class);
+                startActivity(intent);
+            }
+        });
+        explore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ItemLandingActivity.class);
+                startActivity(intent);
+            }
+        });
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,7 +124,7 @@ public class ItemLandingActivity extends BaseActivity {
                                 item.setName(String.valueOf(jsonObject.get("name")));
                                 item.setDetails((String) jsonObject.get("details"));
                                 if (jsonObject.get("pic") != null) {
-                                   // item.setPic((String) jsonObject.get("pic"));
+                                   item.setPic((String) jsonObject.get("pic"));
                                 }
                                 itemList.add(item);
                                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

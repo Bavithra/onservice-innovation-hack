@@ -56,13 +56,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.CustomRecyclerView holder, int position) {
         Item myData = mFilteredList.get(position);
-        holder.txtLabel.setText(myData.getDetails());
+        holder.txtLabel.setText(myData.getName());
         if (myData.getPic() != null) {
             try{
                 byte [] encodeByte= Base64.decode(myData.getPic(),Base64.DEFAULT);
                 Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
                 holder.avatar.setImageBitmap(bitmap);
                 if (myData.getType().equalsIgnoreCase("giveaway")) {
+
                     // show give away view
                     holder.giveout.setVisibility(View.VISIBLE);
                     holder.lookingfor.setVisibility(View.GONE);
