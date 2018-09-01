@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -19,16 +21,20 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.model.Item;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.SingletonRequestQueue;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CustomRecyclerView> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CustomRecyclerView> implements Filterable {
     private List<Item> itemList;
+    private List<Item> mFilteredList;
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
+
     public RecyclerViewAdapter( List<Item> itemList) {
         this.itemList = itemList;
+        mFilteredList=itemList;
     }
 
     @NonNull
@@ -41,12 +47,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return this.itemList.size();
+        return this.mFilteredList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.CustomRecyclerView holder, int position) {
-        Item myData = itemList.get(position);
+        Item myData = mFilteredList.get(position);
         holder.txtLabel.setText(myData.getDetails());
         if (myData.getPic() != null) {
             try{
@@ -69,4 +75,50 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             avatar = itemView.findViewById(R.id.product);
         }
     }
+
+    @Override
+    public  Filter getFilter() {
+
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                String charString = charSequence.toString();
+
+                if (charString.isEmpty()) {
+
+                    mFilteredList = itemList;
+                } else {
+
+                    ArrayList<Item> filteredList = new ArrayList<>();
+
+                    for (Item item : itemList) {
+
+                        if (item.getName().toLowerCase().contains(charString) || item.getName().toLowerCase().contains(charString) || item.getName().toLowerCase().contains(charString)) {
+
+                            filteredList.add(item);
+                        }
+                    }
+
+                    mFilteredList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mFilteredList = (ArrayList<Item>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+
+
+
+
+
 }

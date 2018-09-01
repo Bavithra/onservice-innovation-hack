@@ -10,69 +10,112 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        card_view:cardBackgroundColor="#F1F9ff"
+        card_view:cardBackgroundColor="#F1F8FE"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="6dp"
         card_view:cardUseCompatPadding="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/description_layout"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/user"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="35dp"
-                android:layout_marginLeft="17dp"
-                android:layout_width="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/man"
+                android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right" />
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="60dp"
+                        android:layout_marginLeft="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="7dp"
+                        android:layout_height="25dp"
+                        android:textColor="#2699FB"
+                        android:text="John"
+                        android:layout_below="@id/user"
+                        />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="100dp"
-                android:layout_toLeftOf="@id/product"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:ellipsize="end"
+                android:textColor="#3893DC"
                 android:textStyle="bold"
                 android:layout_marginBottom="45dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="2dp"
                 android:text="Dress for children"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="34dp"
                 android:layout_toRightOf="@id/user"/>
 
-            <ImageView
-                android:id="@+id/product"
-                android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="true"
-
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="100dp"
-                android:layout_height="1000dp"
-                android:layout_gravity="right"/>
-
             <Button
-                android:layout_width="105dp"
-                android:layout_below="@id/user"
                 android:id="@+id/button1"
-                android:layout_toLeftOf="@id/button2"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_height="100dp"
-                android:text="Available" />
-
-            <Button
                 android:layout_width="105dp"
                 android:layout_below="@id/user"
+                android:layout_marginLeft="90dp"
+                android:textColor="#2699FB"
+                android:textSize="15sp"
+                android:background="@drawable/buttonshape"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="5dp"
-                android:layout_toLeftOf="@id/product"
-                android:layout_marginRight="5dp"
-                android:id="@+id/button2"
-                android:layout_marginTop="10dp"
-                android:layout_height="100dp"
-                android:text="Give It" />
+                android:layout_height="30dp"
+                android:textStyle="bold"
+                android:text="Available" />
+                    <TextView
+                        android:id="@+id/giving_out"
+                        android:layout_width="match_parent"
+                        android:layout_below="@id/button1"
+                        android:layout_alignParentBottom="true"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="Giving Out"
+                        android:background="#E71F8B"
+                        android:visibility="gone"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/looking_for"
+                        android:layout_width="match_parent"
+                        android:layout_below="@id/button1"
+                        android:layout_alignParentBottom="true"
+                        android:layout_height="5dp"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:text="Looking for"
+                        android:background="#F5D028"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/product_layout"
+                android:layout_weight="0.7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/product"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/dog"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
-        </RelativeLayout>
+
+
+        </LinearLayout>
             </android.support.v7.widget.CardView>
 </LinearLayout>

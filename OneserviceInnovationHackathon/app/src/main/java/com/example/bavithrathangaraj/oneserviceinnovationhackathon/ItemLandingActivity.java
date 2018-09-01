@@ -2,11 +2,15 @@ package com.example.bavithrathangaraj.oneserviceinnovationhackathon;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -27,7 +31,7 @@ import java.util.List;
 public class ItemLandingActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    private static final String BASE_URL = "http://10.0.1.65:3000/api/goods";
+    private static final String BASE_URL = "http://192.168.1.169:3000/api/goods/Bob";
     RecyclerViewAdapter adapter;
 
     @Override
@@ -57,7 +61,7 @@ public class ItemLandingActivity extends AppCompatActivity {
                                 item.setName(String.valueOf(jsonObject.get("name")));
                                 item.setDetails((String) jsonObject.get("details"));
                                 if (jsonObject.get("pic") != null) {
-                                    item.setPic((String) jsonObject.get("pic"));
+                                   // item.setPic((String) jsonObject.get("pic"));
                                 }
                                 itemList.add(item);
                             } catch (JSONException e) {
@@ -94,4 +98,41 @@ public class ItemLandingActivity extends AppCompatActivity {
         });
         queue.add(req);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem search = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) search.getActionView();
+        search(searchView);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void search(SearchView searchView) {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                if (adapter != null) adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+    }
 }
+

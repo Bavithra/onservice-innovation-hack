@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VolleyHelper {
-    private static final String BASE_URL = "http://10.0.1.65:3000/api/goods";
+    private static final String BASE_URL = "http://192.168.1.169:3000/api/goods";
 
     public static void POSTStringAndJSONRequest(final Context context) {
 
