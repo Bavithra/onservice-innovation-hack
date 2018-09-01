@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        card_view:cardBackgroundColor="#F1F9ff"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/user"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="17dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:background="@drawable/user"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="100dp"
+                android:layout_toLeftOf="@id/product"
+                android:layout_height="50dp"
+                android:ellipsize="end"
+                android:textSize="20dp"
+                android:layout_marginBottom="52dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:text="Dress for children"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@id/user"/>
+
+            <ImageView
+                android:id="@+id/product"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/folder"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_below="@id/user"
+                android:id="@+id/button1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="85dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="100dp"
+                android:text="Available" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_below="@id/user"
+                android:layout_alignParentRight="true"
+                android:id="@+id/button2"
+                android:layout_marginRight="85dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="100dp"
+                android:text="Give It" />
+
+
+        </RelativeLayout>
+            </android.support.v7.widget.CardView>
+</LinearLayout>
