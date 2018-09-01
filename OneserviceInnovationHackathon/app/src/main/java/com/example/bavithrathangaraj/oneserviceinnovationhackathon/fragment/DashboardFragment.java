@@ -21,6 +21,7 @@ import com.example.bavithrathangaraj.oneserviceinnovationhackathon.utilities.Ima
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.utilities.PictureUtility;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,7 +56,7 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
             case R.id.camera:
                 StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
                 StrictMode.setVmPolicy(builder.build());
-                PictureUtility.startCamera(this);
+              //  PictureUtility.startCamera(this);
 //                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://news.pg.com/"));
 //                startActivity(myIntent);
                 break;
@@ -69,7 +70,7 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
 
             imageRecogniserUtility.recogniseTextInImage(PictureUtility.getCameraFileUri(), getActivity().getContentResolver(), new ImageRecogniserUtility.OnImageRecognition() {
                 @Override
-                public void onSuccess(ArrayList<String> texts) {
+                public void onSuccess(HashMap<String,String> texts) {
                     Toast.makeText(getContext(), "The object is " + texts.get(0) + "", Toast.LENGTH_LONG).show();
                 }
 

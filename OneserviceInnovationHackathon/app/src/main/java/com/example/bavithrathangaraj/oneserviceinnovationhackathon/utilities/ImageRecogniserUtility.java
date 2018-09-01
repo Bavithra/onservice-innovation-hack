@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -24,6 +25,7 @@ import com.google.api.services.vision.v1.model.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -41,6 +43,7 @@ public class ImageRecogniserUtility {
     private static final String STR_TEXT_DETECTION = "LABEL_DETECTION";
     private static final String TAG = "ImageRecogniserUtility";
     private static final int MAXIMUM_NUMBER_OF_RESULTS = 10;
+    private static Bitmap bitmapImage = null;
 
     /********************************************************/
     // Public Interfaces
@@ -54,7 +57,7 @@ public class ImageRecogniserUtility {
          * On successful information retrieval the user will be notified.
          * @param texts The list of texts that were identified in the image.
          */
-        void onSuccess(ArrayList<String> texts);
+        void onSuccess(HashMap<String,String> texts);
 
         /**
          * Called if we get an error while retrieving information from the server.
@@ -70,7 +73,7 @@ public class ImageRecogniserUtility {
     /**
      * The list that will be returned to the user.
      */
-    private ArrayList<String> arrTexts;
+    private HashMap<String,String> arrTexts;
 
     /**
      * The maximum number of results that needs to be returned by the server.
@@ -98,7 +101,7 @@ public class ImageRecogniserUtility {
         if (imageURI != null) {
             try {
                 // Initialize the array list
-                arrTexts = new ArrayList<>();
+                arrTexts = new HashMap<>();
 
                 // Store the maximum number of text integer for later use
                 maximumNumberOfResults = MAXIMUM_NUMBER_OF_RESULTS;
@@ -109,6 +112,7 @@ public class ImageRecogniserUtility {
                 // scale the image to 800px to save on bandwidth
                 Bitmap bitmap = scaleBitmapDown(MediaStore.Images.Media.getBitmap(cr, imageURI), 1200);
                 Log.e(TAG, "calling cloud vision");
+                bitmapImage=bitmap;
                 callCloudVision(bitmap);
 
             } catch (IOException e) {
@@ -134,9 +138,9 @@ public class ImageRecogniserUtility {
     private void callCloudVision(final Bitmap bitmap) throws IOException {
 
         // Do the real work in an async task, because we need to use the network anyway
-        new AsyncTask<Object, Void, ArrayList<String>>() {
+        new AsyncTask<Object, Void, HashMap<String,String>>() {
             @Override
-            protected ArrayList<String> doInBackground(Object... params) {
+            protected HashMap<String,String> doInBackground(Object... params) {
                 try {
                     HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
                     JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
@@ -195,7 +199,7 @@ public class ImageRecogniserUtility {
                 return arrTexts;
             }
 
-            protected void onPostExecute(ArrayList<String> result) {
+            protected void onPostExecute(HashMap<String,String> result) {
                 listener.onSuccess(result);
             }
         }.execute();
@@ -232,14 +236,25 @@ public class ImageRecogniserUtility {
      * @param response The response received from Google.
      * @return The list of strings in the response.
      */
-    private ArrayList<String> convertResponseToString(BatchAnnotateImagesResponse response) {
+    private HashMap<String,String> convertResponseToString(BatchAnnotateImagesResponse response) {
 
         List<EntityAnnotation> texts = response.getResponses().get(0).getLabelAnnotations();
         if (texts != null) {
             for (EntityAnnotation text : texts) {
-                arrTexts.add(text.getDescription());
+                arrTexts.put("desc",text.getDescription());
+                arrTexts.put("bitmap",BitMapToString(bitmapImage));
             }
         }
         return arrTexts;
+    }
+
+
+    //Bitmap to String
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 }

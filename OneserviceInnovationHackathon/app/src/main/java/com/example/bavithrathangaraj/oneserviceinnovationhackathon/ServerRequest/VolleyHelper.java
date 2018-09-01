@@ -42,7 +42,7 @@ public class VolleyHelper {
     private static final String BASE_URL_POST = "http://192.168.1.169:3000/api/goods";
 
     public static void
-    POSTStringAndJSONRequest(final Context context, Item item,Bitmap icon) {
+    POSTStringAndJSONRequest(final Context context, Item item,String image) {
 
         RequestQueue queue = com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.SingletonRequestQueue.getInstance(context).getRequestQueue();
 
@@ -58,7 +58,7 @@ public class VolleyHelper {
         };
 
         //Bitmap icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.dog);
-        String image = convertBitmapToString(icon);
+      //  String image = convertBitmapToString(icon);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("name", item.getName());

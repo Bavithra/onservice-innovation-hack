@@ -124,7 +124,7 @@ public class ItemLandingActivity extends BaseActivity {
                                 item.setName(String.valueOf(jsonObject.get("name")));
                                 item.setDetails((String) jsonObject.get("details"));
                                 if (jsonObject.get("pic") != null) {
-                                   item.setPic((String) jsonObject.get("pic"));
+                                   // item.setPic((String) jsonObject.get("pic"));
                                 }
                                 itemList.add(item);
                                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
