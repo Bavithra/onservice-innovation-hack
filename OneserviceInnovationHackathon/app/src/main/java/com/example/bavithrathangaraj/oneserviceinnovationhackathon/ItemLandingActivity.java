@@ -1,7 +1,10 @@
 package com.example.bavithrathangaraj.oneserviceinnovationhackathon;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -20,8 +24,12 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.VolleyHelper;
+import com.example.bavithrathangaraj.oneserviceinnovationhackathon.activity.ProfileActivity;
+import com.example.bavithrathangaraj.oneserviceinnovationhackathon.activity.SelectUserActivity;
+import com.example.bavithrathangaraj.oneserviceinnovationhackathon.base.BaseActivity;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.model.Item;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.SingletonRequestQueue;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemLandingActivity extends AppCompatActivity {
+public class ItemLandingActivity extends BaseActivity {
 
     RecyclerView recyclerView;
     private static final String BASE_URL = "http://192.168.1.169:3000/api/goods/Bob";
@@ -41,6 +49,23 @@ public class ItemLandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_landing);
 
+        ImageView profile = (ImageView) findViewById(R.id.profile);
+        ImageView notification = (ImageView) findViewById(R.id.notification);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), SelectUserActivity.class);
+                startActivity(intent);
+            }
+        });
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
@@ -73,6 +98,12 @@ public class ItemLandingActivity extends AppCompatActivity {
                                    // item.setPic((String) jsonObject.get("pic"));
                                 }
                                 itemList.add(item);
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor prefsEditor = prefs.edit();
+                                Gson gson = new Gson();
+                                String json = gson.toJson(item);
+                                prefsEditor.putString("item", json);
+                                prefsEditor.apply();
                             } catch (JSONException e) {
                             }
                         }

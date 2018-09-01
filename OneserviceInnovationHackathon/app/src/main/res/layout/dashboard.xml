@@ -44,7 +44,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_height="25dp"
                         android:textColor="#2699FB"
-                        android:text="John"
+                        android:text="Bob"
                         android:layout_below="@id/user"
                         />
 
@@ -74,7 +74,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_height="30dp"
                 android:textStyle="bold"
-                android:text="Available" />
+                android:text="Request" />
                     <TextView
                         android:id="@+id/giving_out"
                         android:layout_width="match_parent"
