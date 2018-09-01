@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 
 import java.io.File;
 
@@ -48,7 +49,15 @@ public class PictureUtility {
     public static void startCamera(Fragment fragment) {
         if (PermissionUtils.requestPermission(fragment.getActivity(), CAMERA_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, getCameraFileUri());
+            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+            Uri apkURI = FileProvider.getUriForFile(
+                    fragment.getActivity(),
+                    fragment.getActivity().getApplicationContext()
+                            .getPackageName() + ".provider", new File(dir, FILE_NAME_CAMERA));
+
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+           intent.putExtra(MediaStore.EXTRA_OUTPUT, apkURI);
             fragment.startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
         } else {
             //TODO - Handle the scenario where the user denies the permission to his photos/camera.
@@ -63,6 +72,8 @@ public class PictureUtility {
     public static Uri getCameraFileUri() {
         File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         return Uri.fromFile(new File(dir, FILE_NAME_CAMERA));
+
+
     }
 }
 
