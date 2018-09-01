@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.VolleyHelper;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.model.Item;
 import com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.SingletonRequestQueue;
 
@@ -46,6 +48,13 @@ public class ItemLandingActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+
+        VolleyHelper.requestLoginDetails(getApplicationContext(), new ServerCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+
+            }
+        });
 
         RequestQueue queue = SingletonRequestQueue.getInstance(getApplicationContext()).getRequestQueue();
         final List<Item> itemList = new ArrayList<>();
@@ -97,6 +106,7 @@ public class ItemLandingActivity extends AppCompatActivity {
             }
         });
         queue.add(req);
+
     }
 
 

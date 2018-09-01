@@ -18,9 +18,15 @@ public class Item implements Serializable{
     @SerializedName("tags")
     private String[] tags;
     @SerializedName("datePosted")
-    private Date datePosted;
+    private String datePosted;
+    @SerializedName("category")
+    private String category;
+    @SerializedName("type")
+    private String type;
+    @SerializedName("status")
+    private String status;
 
-    public Item(String pic, String name, String details, String location, String[] tags, Date datePosted) {
+    public Item(String pic, String name, String details, String location, String[] tags, String datePosted) {
         this.pic = pic;
         this.name = name;
         this.details = details;
@@ -73,11 +79,35 @@ public class Item implements Serializable{
         this.tags = tags;
     }
 
-    public Date getDatePosted() {
+    public String getDatePosted() {
         return datePosted;
     }
 
-    public void setDatePosted(Date datePosted) {
+    public void setDatePosted(String datePosted) {
         this.datePosted = datePosted;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

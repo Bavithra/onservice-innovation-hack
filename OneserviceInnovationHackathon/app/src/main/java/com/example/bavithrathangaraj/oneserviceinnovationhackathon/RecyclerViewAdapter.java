@@ -10,6 +10,7 @@ import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -30,6 +31,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    private Button giveButton;
+
 
 
     public RecyclerViewAdapter( List<Item> itemList) {
@@ -59,20 +62,52 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 byte [] encodeByte= Base64.decode(myData.getPic(),Base64.DEFAULT);
                 Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
                 holder.avatar.setImageBitmap(bitmap);
+                if (myData.getType().equalsIgnoreCase("giveaway")) {
+                    // show give away view
+                } else {
+
+                }
             }catch(Exception e){
                 e.getMessage();
             }
         }
     }
 
-    public class CustomRecyclerView extends RecyclerView.ViewHolder {
+
+
+    public class CustomRecyclerView extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtLabel;
         ImageView avatar;
 
         CustomRecyclerView(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             txtLabel = itemView.findViewById(R.id.description);
             avatar = itemView.findViewById(R.id.product);
+            giveButton = itemView.findViewById(R.id.button1);
+        }
+
+        @Override
+        public void onClick(View v) {
+            giveButton.setText("Req");
+
+            //go through each item if you have few items within recycler view
+            if(getLayoutPosition()==0){
+                //Do whatever you want here
+
+
+            }else if(getLayoutPosition()==1){
+                //Do whatever you want here
+
+            }else if(getLayoutPosition()==2){
+
+            }else if(getLayoutPosition()==3){
+
+            }else if(getLayoutPosition()==4){
+
+            }else if(getLayoutPosition()==5){
+
+            }
         }
     }
 
