@@ -29,7 +29,7 @@ public class PictureUtility {
     /****************************************************/
 
     /**
-     * Method to open the gallery for allowing the user to choose an image. After the user has chosen a picture, the "startActivityForResult" will be called.
+     * Method to open the gallery for allowing the User to choose an image. After the User has chosen a picture, the "startActivityForResult" will be called.
      *
      * @param fragment The fragment from which the method is being called.
      */
@@ -42,7 +42,7 @@ public class PictureUtility {
     }
 
     /**
-     * Method to start the camera. After the user has clicked the picture, the "startActivityForResult" will be called.
+     * Method to start the camera. After the User has clicked the picture, the "startActivityForResult" will be called.
      *
      * @param fragment The fragment from which the method is being called.
      */
@@ -60,7 +60,7 @@ public class PictureUtility {
            intent.putExtra(MediaStore.EXTRA_OUTPUT, apkURI);
             fragment.startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
         } else {
-            //TODO - Handle the scenario where the user denies the permission to his photos/camera.
+            //TODO - Handle the scenario where the User denies the permission to his photos/camera.
         }
     }
 
