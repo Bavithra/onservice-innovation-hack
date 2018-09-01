@@ -64,8 +64,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 holder.avatar.setImageBitmap(bitmap);
                 if (myData.getType().equalsIgnoreCase("giveaway")) {
                     // show give away view
+                    holder.giveout.setVisibility(View.VISIBLE);
+                    holder.lookingfor.setVisibility(View.GONE);
                 } else {
-
+                    holder.giveout.setVisibility(View.GONE);
+                    holder.lookingfor.setVisibility(View.VISIBLE);
                 }
             }catch(Exception e){
                 e.getMessage();
@@ -77,12 +80,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class CustomRecyclerView extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtLabel;
+        TextView giveout;
+        TextView lookingfor;
         ImageView avatar;
 
         CustomRecyclerView(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             txtLabel = itemView.findViewById(R.id.description);
+            txtLabel = itemView.findViewById(R.id.giving_out);
+            txtLabel = itemView.findViewById(R.id.looking_for);
             avatar = itemView.findViewById(R.id.product);
             giveButton = itemView.findViewById(R.id.button1);
         }
