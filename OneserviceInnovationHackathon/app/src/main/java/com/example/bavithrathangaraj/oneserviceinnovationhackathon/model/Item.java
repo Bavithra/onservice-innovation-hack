@@ -1,4 +1,4 @@
-package com.example.bavithrathangaraj.oneserviceinnovationhackathon;
+package com.example.bavithrathangaraj.oneserviceinnovationhackathon.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +8,7 @@ import java.util.Date;
 public class Item implements Serializable{
 
     @SerializedName("pic")
-    private byte[] pic;
+    private String pic;
     @SerializedName("name")
     private String name;
     @SerializedName("details")
@@ -20,7 +20,7 @@ public class Item implements Serializable{
     @SerializedName("datePosted")
     private Date datePosted;
 
-    public Item(byte[] pic, String name, String details, String location, String[] tags, Date datePosted) {
+    public Item(String pic, String name, String details, String location, String[] tags, Date datePosted) {
         this.pic = pic;
         this.name = name;
         this.details = details;
@@ -29,11 +29,15 @@ public class Item implements Serializable{
         this.datePosted = datePosted;
     }
 
-    public byte[] getPic() {
+    public Item() {
+
+    }
+
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(byte[] pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 
