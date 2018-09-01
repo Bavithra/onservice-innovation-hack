@@ -38,8 +38,11 @@ import java.util.Map;
 
 public class VolleyHelper {
     private static final String BASE_URL = "http://192.168.1.169:3000/api/goods/Bob";
+    private static final String BASE_URL_PUT = "http://192.168.1.169:3000/api/goods/";
+    private static final String BASE_URL_POST = "http://192.168.1.169:3000/api/goods";
 
-    public static void POSTStringAndJSONRequest(final Context context, Item item,Bitmap icon) {
+    public static void
+    POSTStringAndJSONRequest(final Context context, Item item,Bitmap icon) {
 
         RequestQueue queue = com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.SingletonRequestQueue.getInstance(context).getRequestQueue();
 
@@ -61,13 +64,17 @@ public class VolleyHelper {
             jsonObject.put("name", item.getName());
             jsonObject.put("details", item.getDetails());
             jsonObject.put("location", item.getLocation());
+            jsonObject.put("category", item.getCategory());
+            jsonObject.put("status", item.getStatus());
+            jsonObject.put("type", item.getType());
             jsonObject.put("pic", image);
+            jsonObject.put("postedBy ", "Bob");
             jsonObject.put("datePosted", item.getDatePosted());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(BASE_URL, jsonObject, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(BASE_URL_POST, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 VolleyLog.wtf(response.toString());
@@ -94,7 +101,9 @@ public class VolleyHelper {
 
     public static void putItemDetails(final String itemId, Context context) {
 
-        StringRequest putRequest = new StringRequest(Request.Method.PUT, BASE_URL,
+        RequestQueue queue = com.example.bavithrathangaraj.oneserviceinnovationhackathon.ServerRequest.SingletonRequestQueue.getInstance(context).getRequestQueue();
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, BASE_URL_PUT+itemId,
                 new Response.Listener<String>()
                 {
                     @Override
@@ -117,12 +126,12 @@ public class VolleyHelper {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<>();
-                params.put("name", itemId);
 
                 return params;
             }
 
         };
+        queue.add(putRequest);
 
     }
 

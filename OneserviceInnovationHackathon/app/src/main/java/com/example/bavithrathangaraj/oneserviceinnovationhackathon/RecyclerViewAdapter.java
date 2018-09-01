@@ -89,7 +89,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         public void onClick(View v) {
-            giveButton.setText("Req");
+                giveButton = v.findViewById(R.id.button1);
+                giveButton.setText("Requested");
 
             //go through each item if you have few items within recycler view
             if(getLayoutPosition()==0){

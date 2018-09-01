@@ -27,8 +27,7 @@ public class NotificationRecyclerView extends RecyclerView.Adapter<NotificationR
 
     String[] text;
     String[] botton;
-    TextView textView;
-    Button buttonView;
+
     Context context;
     public NotificationRecyclerView(String[] text, String[] button, Context context) {
         this.text = text;
@@ -41,41 +40,16 @@ public class NotificationRecyclerView extends RecyclerView.Adapter<NotificationR
     public CustomRecyclerView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item, null);
         NotificationRecyclerView.CustomRecyclerView rcv = new NotificationRecyclerView.CustomRecyclerView(layoutView);
-        textView = layoutView.findViewById(R.id.notification_text);
-        buttonView = layoutView.findViewById(R.id.notification_button);
+
         return rcv;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CustomRecyclerView holder, int position) {
         for (int i = 0; i < position; i++) {
-            textView.setText(text[i]);
-            buttonView.setText(botton[i]);
+            holder.textView.setText(text[i]);
+            holder.buttonView.setText(botton[i]);
         }
-
-        buttonView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VolleyHelper.requestLoginDetails(context, new ServerCallback() {
-                            @Override
-                            public void onSuccess(JSONObject result) {
-                                Gson gson = new Gson();
-                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                                String json = prefs.getString("user", "");
-                                User obj = gson.fromJson(json, User.class);
-                                Item item = new Item();
-                                item.setName(obj.getName());
-                                item.setDetails("Item details here");
-                                item.setDatePosted("01/09/2019");
-                                item.setLocation("Clementi");
-                                item.setStatus("not_available");
-                                Bitmap icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.cat);
-                                VolleyHelper.POSTStringAndJSONRequest(context, item, icon);
-
-                            }
-                        });
-            }
-        });
     }
 
     @Override
@@ -83,14 +57,26 @@ public class NotificationRecyclerView extends RecyclerView.Adapter<NotificationR
         return text.length;
     }
 
-    public class CustomRecyclerView extends RecyclerView.ViewHolder {
-        TextView txtLabel;
-        ImageView avatar;
+    public class CustomRecyclerView extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView textView;
+        Button buttonView;
 
         CustomRecyclerView(View itemView) {
             super(itemView);
-            txtLabel = itemView.findViewById(R.id.description);
-            avatar = itemView.findViewById(R.id.product);
+            itemView.setOnClickListener(this);
+            textView = itemView.findViewById(R.id.notification_text);
+            buttonView = itemView.findViewById(R.id.notification_button);;
+        }
+
+        @Override
+        public void onClick(View v) {
+            buttonView = v.findViewById(R.id.notification_button);
+            buttonView.setText("Review");
+            Gson gson = new Gson();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            String json = prefs.getString("item", "");
+            Item obj = gson.fromJson(json, Item.class);
+            VolleyHelper.putItemDetails(obj.getId(),context);
         }
     }
 }

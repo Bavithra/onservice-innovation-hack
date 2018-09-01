@@ -1,9 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".activity.CreateProductActivity">
 
-</android.support.design.widget.CoordinatorLayout>
+    <include layout="@layout/header"/>
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="Title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorPrimary"
+            android:text="TYPE"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <Button
+        android:id="@+id/givingout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Giving Out"
+        android:textColor="@color/white"
+        android:background="#E71F8B"
+        android:layout_weight="1"/>
+
+
+    <Button
+        android:id="@+id/lookingfor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#F5D028"
+        android:text="Looking For"
+        android:textColor="@color/white"
+        android:layout_weight="1"/>
+</LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorPrimary"
+            android:text="CATEGORIES"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/home"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_border"
+                android:text="Home"
+                android:textSize="13dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/lifestyle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_border"
+                android:text="LifeStyle"
+                android:textSize="13dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/perishable"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_border"
+                android:text="Perishables"
+                android:textSize="11dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+
+            <Button
+                android:id="@+id/elctronics"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_border"
+                android:text="Electronics"
+                android:textSize="11dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/basics"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_border"
+                android:text="Basics"
+                android:textSize="13dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/sports"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_border"
+                android:text="Sports"
+                android:textSize="13dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/health"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/button_border"
+                android:text="Health\nBeauty"
+                android:textSize="9dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+
+            <Button
+                android:id="@+id/kids"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_border"
+                android:text="Kids"
+                android:textSize="13dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/bluetan"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user"/>
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="300dp"
+            android:layout_height="150dp" />
+
+        <ImageView
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/user"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/bluetan"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:src="@drawable/user"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:src="@drawable/user"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:src="@drawable/user"/>
+
+    </LinearLayout>
+
+</LinearLayout>
