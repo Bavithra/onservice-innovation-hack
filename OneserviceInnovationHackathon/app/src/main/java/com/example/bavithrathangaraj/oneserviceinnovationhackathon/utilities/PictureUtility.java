@@ -1,6 +1,7 @@
 package com.example.bavithrathangaraj.oneserviceinnovationhackathon.utilities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -45,13 +46,13 @@ public class PictureUtility {
     /**
      * Method to start the camera. After the User has clicked the picture, the "startActivityForResult" will be called.
      *
-     * @param fragment The fragment from which the method is being called.
+     * @param activity The fragment from which the method is being called.
      */
-    public static void startCamera(Fragment fragment) {
-        if (PermissionUtils.requestPermission(fragment.getActivity(), CAMERA_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)) {
+    public static void startCamera(Activity activity) {
+        if (PermissionUtils.requestPermission(activity, CAMERA_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, getCameraFileUri());
-            fragment.startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
+            activity.startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
         } else {
             //TODO - Handle the scenario where the user denies the permission to his photos/camera.
         }
