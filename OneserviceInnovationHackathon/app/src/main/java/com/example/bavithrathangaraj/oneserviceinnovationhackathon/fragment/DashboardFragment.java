@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +53,8 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
         switch (v.getId()){
 
             case R.id.camera:
+                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                StrictMode.setVmPolicy(builder.build());
                 PictureUtility.startCamera(this);
 //                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://news.pg.com/"));
 //                startActivity(myIntent);

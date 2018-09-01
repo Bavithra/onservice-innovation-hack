@@ -1,6 +1,7 @@
 package com.example.bavithrathangaraj.oneserviceinnovationhackathon.utilities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -49,18 +50,10 @@ public class PictureUtility {
     public static void startCamera(Fragment fragment) {
         if (PermissionUtils.requestPermission(fragment.getActivity(), CAMERA_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
-            Uri apkURI = FileProvider.getUriForFile(
-                    fragment.getActivity(),
-                    fragment.getActivity().getApplicationContext()
-                            .getPackageName() + ".provider", new File(dir, FILE_NAME_CAMERA));
-
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-           intent.putExtra(MediaStore.EXTRA_OUTPUT, apkURI);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, getCameraFileUri());
             fragment.startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
         } else {
-            //TODO - Handle the scenario where the User denies the permission to his photos/camera.
+            //TODO - Handle the scenario where the user denies the permission to his photos/camera.
         }
     }
 
@@ -72,8 +65,6 @@ public class PictureUtility {
     public static Uri getCameraFileUri() {
         File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         return Uri.fromFile(new File(dir, FILE_NAME_CAMERA));
-
-
     }
 }
 

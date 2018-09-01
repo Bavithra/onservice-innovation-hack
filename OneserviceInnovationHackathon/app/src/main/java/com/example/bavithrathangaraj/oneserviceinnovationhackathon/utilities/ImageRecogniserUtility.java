@@ -47,11 +47,11 @@ public class ImageRecogniserUtility {
     /********************************************************/
 
     /**
-     * Interface which will help notify the User whether we were successfully able to get text from image or not.
+     * Interface which will help notify the user whether we were successfully able to get text from image or not.
      */
     public interface OnImageRecognition {
         /**
-         * On successful information retrieval the User will be notified.
+         * On successful information retrieval the user will be notified.
          * @param texts The list of texts that were identified in the image.
          */
         void onSuccess(ArrayList<String> texts);
@@ -68,7 +68,7 @@ public class ImageRecogniserUtility {
     /********************************************************/
 
     /**
-     * The list that will be returned to the User.
+     * The list that will be returned to the user.
      */
     private ArrayList<String> arrTexts;
 
@@ -78,7 +78,7 @@ public class ImageRecogniserUtility {
     private int maximumNumberOfResults;
 
     /**
-     * The listener to notify the User about the progress
+     * The listener to notify the user about the progress
      */
     private OnImageRecognition listener;
 
@@ -117,7 +117,7 @@ public class ImageRecogniserUtility {
                 listener.onError("Incorrect image format received.");
             }
         } else {
-           listener.onError("Null image URI passed.");
+            listener.onError("Null image URI passed.");
         }
     }
 
