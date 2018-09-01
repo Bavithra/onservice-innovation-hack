@@ -1,1 +1,1 @@
-# Team Millennial Thnik Tank
+# Team Millennial Think Tank
