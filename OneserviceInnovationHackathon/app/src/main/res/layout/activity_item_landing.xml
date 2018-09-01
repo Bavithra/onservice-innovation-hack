@@ -15,19 +15,21 @@
         android:gravity="end"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:background="@color/colorAccent"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#F5D029"
             android:layout_weight="1"
             android:src="@drawable/ic_launcher_background"/>
 
         <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+            android:background="#00BEE0"
         android:layout_weight="1"
         android:src="@drawable/ic_launcher_background"/>
 
@@ -35,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#E71F8A"
             android:src="@drawable/ic_launcher_background"/>
 
 
