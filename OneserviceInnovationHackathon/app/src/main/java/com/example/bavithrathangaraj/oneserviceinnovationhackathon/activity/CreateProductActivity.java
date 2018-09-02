@@ -157,8 +157,8 @@ public class CreateProductActivity extends AppCompatActivity implements View.OnC
                 @Override
                 public void onSuccess(HashMap<String,String> texts) {
                     title = texts.get("desc");
+                    text.setText(title.toUpperCase());
                     icon1=texts.get("bitmap");
-
                     Toast.makeText(getApplicationContext(), "The object is " + title + "", Toast.LENGTH_LONG).show();
                 }
 
