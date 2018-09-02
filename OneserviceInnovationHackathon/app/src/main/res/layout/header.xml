@@ -10,7 +10,7 @@
     android:layout_margin="20dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/user"/>
+    android:src="@drawable/user_white"/>
 
     <ImageView
         android:layout_margin="20dp"
@@ -23,7 +23,7 @@
     android:layout_margin="20dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/user"/>
+    android:src="@drawable/notification"/>
 
 
 </LinearLayout>

@@ -32,17 +32,6 @@
         <activity
             android:name=".activity.DashboardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
-
         <activity
             android:name=".activity.SelectUserActivity"
             android:label="@string/title_activity_select_user"
@@ -54,8 +43,10 @@
         <activity
             android:name=".base.BaseActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.AnalyticsActivity"></activity>
     </application>
 
 </manifest>
